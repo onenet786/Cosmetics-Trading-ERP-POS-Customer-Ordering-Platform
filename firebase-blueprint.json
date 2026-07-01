@@ -1,0 +1,240 @@
+{
+  "entities": {
+    "Branch": {
+      "title": "Branch",
+      "description": "A physical business branch location",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "code": { "type": "string" },
+        "location": { "type": "string" }
+      },
+      "required": ["id", "name", "code", "location"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "A cosmetics product model",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "brand": { "type": "string" },
+        "category": { "type": "string" },
+        "subcategory": { "type": "string" },
+        "description": { "type": "string" },
+        "hsCode": { "type": "string" },
+        "taxRate": { "type": "number" },
+        "baseUnit": { "type": "string" },
+        "isBatchTracked": { "type": "boolean" },
+        "image": { "type": "string" }
+      },
+      "required": ["id", "name", "brand", "category", "subcategory", "description", "hsCode", "taxRate", "baseUnit", "isBatchTracked", "image"]
+    },
+    "ProductVariant": {
+      "title": "ProductVariant",
+      "description": "A specific variant size or shade of a product",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "productId": { "type": "string" },
+        "name": { "type": "string" },
+        "sku": { "type": "string" },
+        "barcode": { "type": "string" },
+        "pricePiece": { "type": "number" },
+        "priceDozen": { "type": "number" },
+        "priceCarton": { "type": "number" },
+        "stockLevel": { "type": "number" }
+      },
+      "required": ["id", "productId", "name", "sku", "barcode", "pricePiece", "priceDozen", "priceCarton", "stockLevel"]
+    },
+    "Batch": {
+      "title": "Batch",
+      "description": "A batch of cosmetics with an expiry date",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "productId": { "type": "string" },
+        "batchNumber": { "type": "string" },
+        "expiryDate": { "type": "string" },
+        "quantity": { "type": "number" },
+        "costPrice": { "type": "number" }
+      },
+      "required": ["id", "productId", "batchNumber", "expiryDate", "quantity", "costPrice"]
+    },
+    "COAAccount": {
+      "title": "COAAccount",
+      "description": "Chart of Accounts account record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "code": { "type": "string" },
+        "name": { "type": "string" },
+        "type": { "type": "string", "enum": ["Asset", "Liability", "Equity", "Revenue", "Expense", "COGS"] },
+        "parentId": { "type": "string" },
+        "balance": { "type": "number" }
+      },
+      "required": ["id", "code", "name", "type", "balance"]
+    },
+    "Party": {
+      "title": "Party",
+      "description": "A customer, supplier, salon, or wholesaler",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "type": { "type": "string", "enum": ["Customer", "Supplier", "Both"] },
+        "classification": { "type": "string", "enum": ["Retailer", "Wholesaler", "Distributor", "Salon", "Walk-In"] },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "creditLimit": { "type": "number" },
+        "creditPeriod": { "type": "number" },
+        "balance": { "type": "number" }
+      },
+      "required": ["id", "name", "type", "classification", "phone", "email", "creditLimit", "creditPeriod", "balance"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "A customer sales order",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "orderNumber": { "type": "string" },
+        "date": { "type": "string" },
+        "partyId": { "type": "string" },
+        "customerName": { "type": "string" },
+        "customerPhone": { "type": "string" },
+        "subtotal": { "type": "number" },
+        "tax": { "type": "number" },
+        "discount": { "type": "number" },
+        "total": { "type": "number" },
+        "status": { "type": "string" },
+        "paymentStatus": { "type": "string" },
+        "paymentMethod": { "type": "string" },
+        "branchId": { "type": "string" },
+        "deliveryAddress": { "type": "string" },
+        "riderPosition": { "type": "number" },
+        "riderId": { "type": "string" },
+        "estimatedDeliveryTime": { "type": "string" },
+        "notes": { "type": "string" }
+      },
+      "required": ["id", "orderNumber", "date", "partyId", "customerName", "customerPhone", "subtotal", "tax", "discount", "total", "status", "paymentStatus", "paymentMethod", "branchId", "deliveryAddress", "riderPosition", "estimatedDeliveryTime"]
+    },
+    "ReturnRequest": {
+      "title": "ReturnRequest",
+      "description": "A POS/Till product return request",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "sessionNo": { "type": "string" },
+        "cashierName": { "type": "string" },
+        "branchId": { "type": "string" },
+        "originalInvoiceNo": { "type": "string" },
+        "itemName": { "type": "string" },
+        "qty": { "type": "number" },
+        "uom": { "type": "string" },
+        "reason": { "type": "string" },
+        "refundAmount": { "type": "number" },
+        "status": { "type": "string", "enum": ["Pending", "Approved", "Rejected"] },
+        "requestedAt": { "type": "string" },
+        "approvedAt": { "type": "string" },
+        "rejectedReason": { "type": "string" }
+      },
+      "required": ["id", "sessionNo", "cashierName", "branchId", "originalInvoiceNo", "itemName", "qty", "uom", "reason", "refundAmount", "status", "requestedAt"]
+    },
+    "Notification": {
+      "title": "Notification",
+      "description": "A system event log/alert",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "time": { "type": "string" },
+        "type": { "type": "string", "enum": ["info", "alert", "success", "warning"] },
+        "read": { "type": "boolean" }
+      },
+      "required": ["id", "title", "message", "time", "type", "read"]
+    },
+    "StockTransfer": {
+      "title": "StockTransfer",
+      "description": "A transfer of product items from branch to branch",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "transferNumber": { "type": "string" },
+        "fromBranchId": { "type": "string" },
+        "toBranchId": { "type": "string" },
+        "productId": { "type": "string" },
+        "qty": { "type": "number" },
+        "uom": { "type": "string" },
+        "status": { "type": "string", "enum": ["Draft", "Requested", "Dispatched", "Received"] },
+        "date": { "type": "string" }
+      },
+      "required": ["id", "transferNumber", "fromBranchId", "toBranchId", "productId", "qty", "uom", "status", "date"]
+    },
+    "Voucher": {
+      "title": "Voucher",
+      "description": "A financial journal voucher entry",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "number": { "type": "string" },
+        "date": { "type": "string" },
+        "type": { "type": "string" },
+        "branchId": { "type": "string" },
+        "narration": { "type": "string" },
+        "approved": { "type": "boolean" },
+        "approvedBy": { "type": "string" },
+        "attachmentUrl": { "type": "string" }
+      },
+      "required": ["id", "number", "date", "type", "branchId", "narration", "approved"]
+    }
+  },
+  "firestore": {
+    "branches": {
+      "schema": { "$ref": "#/entities/Branch" },
+      "description": "Collection of all physical SilkGlow branches"
+    },
+    "products": {
+      "schema": { "$ref": "#/entities/Product" },
+      "description": "Collection of all cosmetics products catalog"
+    },
+    "variants": {
+      "schema": { "$ref": "#/entities/ProductVariant" },
+      "description": "Collection of product shades, sizes, and pricing configurations"
+    },
+    "batches": {
+      "schema": { "$ref": "#/entities/Batch" },
+      "description": "Tracking of inventory batch expiries and stock-in batches"
+    },
+    "coaAccounts": {
+      "schema": { "$ref": "#/entities/COAAccount" },
+      "description": "Chart of Accounts records containing GL codes and real-time balances"
+    },
+    "parties": {
+      "schema": { "$ref": "#/entities/Party" },
+      "description": "List of business partners, salon owners, and customer profiles"
+    },
+    "orders": {
+      "schema": { "$ref": "#/entities/Order" },
+      "description": "Customer purchase orders, delivery statuses, and billing"
+    },
+    "returnRequests": {
+      "schema": { "$ref": "#/entities/ReturnRequest" },
+      "description": "Sales returns desk refund requests pending manager approval"
+    },
+    "notifications": {
+      "schema": { "$ref": "#/entities/Notification" },
+      "description": "Group notification system for branch event logs and alerts"
+    },
+    "stockTransfers": {
+      "schema": { "$ref": "#/entities/StockTransfer" },
+      "description": "Inter-branch stock transfer ledger"
+    },
+    "vouchers": {
+      "schema": { "$ref": "#/entities/Voucher" },
+      "description": "Financial general ledger vouchers"
+    }
+  }
+}

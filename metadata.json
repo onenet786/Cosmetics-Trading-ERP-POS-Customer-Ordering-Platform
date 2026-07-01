@@ -1,0 +1,6 @@
+{
+  "name": "Cosmetics Trading ERP, POS & Customer Ordering Platform",
+  "description": "An integrated multi-branch cosmetics trading system featuring an ERP financial/inventory backend, Point-of-Sale (POS) cashier desk, owner mobile approvals, and customer web/mobile ordering with secure checkout and real-time delivery tracking.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
