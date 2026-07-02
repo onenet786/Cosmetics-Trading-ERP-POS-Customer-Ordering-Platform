@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
+import { getDatabaseUrl } from './prisma.config.ts';
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({ datasources: { db: { url: getDatabaseUrl() } } });
 
 async function main() {
   // Seed some example data
