@@ -10,4 +10,4 @@ if [ ! -f .env ]; then
   exit 1
 fi
 
-npx prisma migrate dev --name init
+npx prisma db push
