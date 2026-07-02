@@ -1,0 +1,148 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+// datasource URL is provided via code
+}
+
+model Customer {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  phone     String?
+  address   String?
+  createdAt DateTime @default(now())
+// orders    Order[]  // removed to avoid missing relation
+}
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  sku         String   @unique
+  name        String
+  description String?
+  price       Decimal  @db.Decimal(10,2)
+  stockQty    Int      @default(0)
+  createdAt   DateTime @default(now())
+  variants    Variant[]
+  batches     Batch[]
+}
+
+model Variant {
+  id          Int      @id @default(autoincrement())
+  product     Product  @relation(fields: [productId], references: [id])
+  productId   Int
+  name        String
+  sku         String
+  barcode     String
+  pricePiece  Int
+  priceDozen  Int
+  priceCarton Int
+  stockLevel  Int
+}
+
+model Batch {
+  id          Int      @id @default(autoincrement())
+  product     Product  @relation(fields: [productId], references: [id])
+  productId   Int
+  batchNumber String
+  expiryDate  String
+  quantity    Int
+  costPrice   Int
+}
+
+model CoaAccount {
+  id       String @id
+  code     String
+  name     String
+  type     String
+  parentId String?
+  balance  Float
+}
+
+model Party {
+  id            String @id
+  name          String
+  type          String
+  classification String
+  phone         String
+  email         String
+  creditLimit   Int
+  creditPeriod  Int
+  balance       Float
+}
+
+model Order {
+  id                    String   @id
+  orderNumber           String
+  date                  String
+  partyId               String
+  customerName          String
+  customerPhone         String
+  items                 Json
+  subtotal              Float
+  tax                   Float
+  discount              Float
+  total                 Float
+  status                String
+  paymentStatus         String
+  paymentMethod         String
+  branchId              String
+  deliveryAddress       String
+  riderPosition         Int
+  riderId               String?
+  estimatedDeliveryTime String
+  notes                 String?
+}
+
+model Notification {
+  id      String @id
+  title   String
+  message String
+  time    String
+  type    String
+  read    Boolean
+}
+
+model ReturnRequest {
+  id               String @id
+  sessionNo        String
+  cashierName      String
+  branchId         String
+  originalInvoiceNo String
+  itemName         String
+  qty              Int
+  uom              String
+  reason           String
+  refundAmount     Int
+  status           String
+  requestedAt      String
+  approvedAt       String?
+  rejectedReason   String?
+}
+
+model StockTransfer {
+  id            String @id
+  transferNumber String
+  fromBranchId  String
+  toBranchId    String
+  productId     String
+  qty           Int
+  uom           String
+  status        String
+  date          String
+}
+
+model Voucher {
+  id            String @id
+  number        String
+  date          String
+  type          String
+  branchId      String
+  narration     String
+  lines         Json
+  approved      Boolean
+  approvedBy    String?
+  attachmentUrl String?
+}

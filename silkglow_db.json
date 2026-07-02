@@ -645,13 +645,13 @@
       "tax": 5610,
       "discount": 500,
       "total": 38110,
-      "status": "InTransit",
+      "status": "Delivered",
       "paymentStatus": "Paid",
       "paymentMethod": "Card",
       "branchId": "b-01",
       "deliveryAddress": "Royal Arcade, Phase 4, Civic Center, Rawalpindi",
-      "riderPosition": 65,
-      "estimatedDeliveryTime": "12 mins"
+      "riderPosition": 100,
+      "estimatedDeliveryTime": "Completed"
     }
   ],
   "notifications": [
@@ -678,6 +678,14 @@
       "time": "1 day ago",
       "type": "success",
       "read": true
+    },
+    {
+      "id": "not-1783031614242",
+      "title": "Delivery Completed",
+      "message": "Order SO-2026-002 successfully delivered to The Royal Parlor. Funds reconciled.",
+      "time": "Just now",
+      "type": "success",
+      "read": false
     }
   ],
   "returnRequests": [
@@ -930,6 +938,14 @@
       "type": "Expense",
       "parentId": "a-6000",
       "balance": 350000
+    },
+    {
+      "id": "a-1783031559978",
+      "code": ".25",
+      "name": "Admin",
+      "type": "Liability",
+      "parentId": "a-1000",
+      "balance": 0
     }
   ],
   "return_requests": [

@@ -1,7 +1,7 @@
 import express from "express";
 import path from "path";
 import { createServer as createViteServer } from "vite";
-import { initDatabase, dbService } from "./src/db/postgres.ts";
+import { initDatabase, dbService } from "./src/db/prisma";
 
 async function startServer() {
   // Initialize the database connection (PostgreSQL with self-seeding, or local file fallback)
@@ -9,7 +9,7 @@ async function startServer() {
 
   const app = express();
   app.use(express.json());
-  const PORT = 3000;
+  const PORT = 3019;
 
   // API Status & Configuration Info (Useful for confirming aaPanel environments)
   app.get("/api/health", (req, res) => {
