@@ -4,6 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+// url provided via code
 // datasource URL is provided via code
 }
 
