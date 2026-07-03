@@ -12,5 +12,9 @@ export function getDatabaseUrl(): string {
   if (!match) {
     throw new Error("DATABASE_URL not defined in .env");
   }
-  return match[1].trim();
+  let rawUrl = match[1].trim();
+  if ((rawUrl.startsWith('"') && rawUrl.endsWith('"')) || (rawUrl.startsWith("'") && rawUrl.endsWith("'"))) {
+    rawUrl = rawUrl.substring(1, rawUrl.length - 1);
+  }
+  return rawUrl;
 }
