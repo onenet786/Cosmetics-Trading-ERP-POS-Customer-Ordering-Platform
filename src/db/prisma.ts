@@ -1,8 +1,12 @@
 // src/db/prisma.ts
 import { PrismaClient } from '@prisma/client';
+import { PrismaPg } from '@prisma/adapter-pg';
+import pg from 'pg';
 import { getDatabaseUrl } from '../../prisma/prisma.config';
 
-const prisma = new PrismaClient({ datasources: { db: { url: getDatabaseUrl() } } });
+const pool = new pg.Pool({ connectionString: getDatabaseUrl() });
+const adapter = new PrismaPg(pool);
+const prisma = new PrismaClient({ adapter });
 
 export const initDatabase = async () => {
   await prisma.$connect();
