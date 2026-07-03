@@ -133,8 +133,8 @@ npm install -g pm2
 # Build the app (bundles server.ts to dist/server.cjs)
 npm run build
 
-# Start the server with PM2
-pm2 start dist/server.cjs --name erp-app --watch
+# Start the server with PM2 in production mode
+pm2 start dist/server.cjs --name erp-app --env NODE_ENV=production --watch
 
 # Save the process list so it survives reboots
 pm2 save
