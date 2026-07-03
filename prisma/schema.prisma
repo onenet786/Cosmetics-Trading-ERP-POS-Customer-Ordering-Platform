@@ -147,3 +147,10 @@ model Voucher {
   approvedBy    String?
   attachmentUrl String?
 }
+
+model Branch {
+  id       String @id
+  name     String
+  code     String
+  location String
+}

@@ -127,20 +127,20 @@ export default function App() {
       const unsubVariants = firebaseService.subscribeCollection<ProductVariant>('variants', setVariants);
       const unsubBatches = firebaseService.subscribeCollection<Batch>('batches', setBatches);
       const unsubCoa = firebaseService.subscribeCollection<COAAccount>('coaAccounts', (data) => {
-        const sorted = [...data].sort((a, b) => a.code.localeCompare(b.code));
+        const sorted = [...data].sort((a, b) => (a.code || '').localeCompare(b.code || ''));
         setCoaAccounts(sorted);
       });
       const unsubParties = firebaseService.subscribeCollection<Party>('parties', setParties);
       const unsubOrders = firebaseService.subscribeCollection<Order>('orders', (data) => {
-        const sorted = [...data].sort((a, b) => b.id.localeCompare(a.id));
+        const sorted = [...data].sort((a, b) => (b.id || '').localeCompare(a.id || ''));
         setOrders(sorted);
       });
       const unsubNotifications = firebaseService.subscribeCollection<Notification>('notifications', (data) => {
-        const sorted = [...data].sort((a, b) => b.id.localeCompare(a.id));
+        const sorted = [...data].sort((a, b) => (b.id || '').localeCompare(a.id || ''));
         setNotifications(sorted);
       });
       const unsubReturns = firebaseService.subscribeCollection<ReturnRequest>('returnRequests', (data) => {
-        const sorted = [...data].sort((a, b) => b.id.localeCompare(a.id));
+        const sorted = [...data].sort((a, b) => (b.id || '').localeCompare(a.id || ''));
         setReturnRequests(sorted);
       });
       const unsubTransfers = firebaseService.subscribeCollection<StockTransfer>('stockTransfers', setStockTransfers);

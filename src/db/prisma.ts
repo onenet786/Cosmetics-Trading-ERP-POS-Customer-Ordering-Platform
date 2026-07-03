@@ -15,6 +15,7 @@ const getModelName = (collectionName: string): string => {
     case 'stockTransfers': return 'stockTransfer';
     case 'parties': return 'party';
     case 'batches': return 'batch';
+    case 'branches': return 'branch';
     default:
       if (collectionName.endsWith('s')) {
         return collectionName.slice(0, -1);

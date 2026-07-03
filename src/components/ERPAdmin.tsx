@@ -395,8 +395,8 @@ export default function ERPAdmin({
                     </thead>
                     <tbody className="divide-y divide-slate-100">
                       {coaAccounts.map(account => {
-                        const isMainClass = account.parentId === null;
-                        const isSubClass = account.parentId?.startsWith('a-') && account.parentId.length === 6;
+                        const isMainClass = account.parentId === null || account.parentId === 'NULL' || account.parentId === 'null' || account.parentId === '';
+                        const isSubClass = account.parentId && !isMainClass && account.parentId.startsWith('a-') && account.parentId.length === 6;
                         return (
                           <tr 
                             key={account.id} 
